@@ -27,10 +27,13 @@ SOURCE = cfg.get("start", "source")
 
 CHAT_ID=cfg.get("telega", "chat_id")
 TOKEN=cfg.get("telega", "token")
+a=[]
+for (each_key, each_val) in cfg.items('mashins'):
+    d=tuple(x.capitalize() for x in each_key.split(' ') )
+    print (f'{d}:{each_val}')
 
-for each_section in cfg.sections('mashins'):
-    for (each_key, each_val) in cfg.items(each_section):
-        print (f'{each_key.upper()}:{each_val}')
+    # for (each_key, each_val) in cfg.items(each_section):
+    #     print (f'{each_key.capitalize()}:{each_val}')
 
 # for x in cfg.get('mashins'):
 #     print(x)
