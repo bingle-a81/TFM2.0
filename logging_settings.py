@@ -1,5 +1,6 @@
 import logging
 import telebot
+import TFM_settings as _settings
 
 
 
@@ -17,7 +18,7 @@ import telebot
 #         except:
 #             pass
 
-bot = telebot.TeleBot('5060398934:AAE0O8b0Op5iNLKIeGNIpCz7Pr-q9tWdTPA')
+bot = telebot.TeleBot(_settings.TOKEN)
 bot.send_message('-1001577560699','Hello')
 
 # b=logging.basicConfig('ff',)
