@@ -1,8 +1,11 @@
 import logging 
-# from logging import StreamHandler, Formatter, LogRecord
+import logging.config
 import smtplib
 import telebot
 from TFM_settings import config
+
+
+
 
 class TelegramBotHandler(logging.Handler):
     def __init__(self, token: str, chat_id: str):
@@ -81,59 +84,79 @@ logger_config = {
         'file': {
             '()': MegaHandler,
             'level': 'INFO',
-            'filename': set.LOG_FILE,
+            'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES')+config.get_set_default('LOG_FILE'),
             'formatter': 'std_format',
         },
-        'file1': {
-            '()': MegaHandler,
-            'level': 'DEBUG',
-            'filename': set.LOG_FILE_DEBUG,
-            'formatter': 'std_format',
-        },
+        # 'file1': {
+        #     '()': MegaHandler,
+        #     'level': 'DEBUG',
+        #     'filename': set.LOG_FILE_DEBUG,
+        #     'formatter': 'std_format',
+        # },
         'email':{
             '()':MegaEmail,
-            'level': 'ERROR',
-            'server':set.SERVER,
-            'port':set.PORT,
-            'email':set.EMAIL,
-            'passwd':set.PASSWD,
+            'level': 'DEBUG',
+            'server':config.get_set_default('server_mail'),
+            'port':config.get_set_default('port_mail'),
+            'email':config.get_set_default('email_mail'),
+            'passwd':config.get_set_default('passwd_mail'),
             'formatter': 'std_format',
         },
         'telegram_handler': {
             '()': TelegramBotHandler,
-            'level': 'WARNING',
-            'chat_id': set.CHAT_ID,
-            'token': set.TOKEN,
+            'level': 'DEBUG',
+            'chat_id': config.get_set_default('chat_id_telega'),
+            'token': config.get_set_default('token_telega'),
             'formatter': 'std_format',
         }
 
     },
     'loggers': {
-        'app_logger': {
+        'simple_logger': {
             'level': 'DEBUG',
-            'handlers': ['console', 'file','email','telegram_handler'],
+            'handlers': ['console'],
             # 'propagate': False
-        },
+        },        
+        # 'app_logger': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console', 'file','email','telegram_handler'],
+        #     # 'propagate': False
+        # },
         'json_logger': {
             'level': 'DEBUG',
             'handlers': ['console','file'],
         },
-        'telega_logger': {
-            'level': 'DEBUG',
-            'handlers': ['telegram_handler'],
-        },
-        'pyautogui_logger': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'file', 'file1'],
-        },
-        'to_database_logger': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'file', 'file1'],
-        },
-        'email_logger':{
-            'level': 'DEBUG',
-            'handlers': ['email'],
-        }
+        # 'telega_logger': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['telegram_handler'],
+        # },
+        # 'pyautogui_logger': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console', 'file', 'file1'],
+        # },
+        # 'to_database_logger': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console', 'file', 'file1'],
+        # },
+        # 'email_logger':{
+        #     'level': 'DEBUG',
+        #     'handlers': ['email'],
+        # }
 
     },
 }
+
+def set_logger(name):
+    logging.config.dictConfig(logger_config)
+    return logging.getLogger(name=name)
+
+# a_log= set_logger('simple_logger')
+
+
+# try:
+#     a=0
+#     b=2
+
+#     print(0/0)
+# except ZeroDivisionError as f:
+#     a_log.info(f)
