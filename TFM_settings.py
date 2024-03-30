@@ -24,7 +24,7 @@ class Get_config():
         return self.cfg.get('default', option)    
 
     def get_dict_section(self,section):
-        return {k:v.split(';') for k,v in self.cfg[section].items()}
+        return {k:v.split('|') for k,v in self.cfg[section].items()}
 
         # for key, val in cfg['NCExplorer'].items():
 #     d=key
@@ -35,7 +35,7 @@ class Get_config():
 
 config=Get_config('set.ini')
 # print(a.get_set_default('source'))
-# print(a.get_dict_section('NCExplorer'))
+# print(config.get_dict_section('NCExplorer'))
     
 
 

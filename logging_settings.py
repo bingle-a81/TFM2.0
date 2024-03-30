@@ -124,7 +124,7 @@ logger_config = {
         # },
         'json_logger': {
             'level': 'DEBUG',
-            'handlers': ['console','file'],
+            'handlers': ['console'],
         },
         # 'telega_logger': {
         #     'level': 'DEBUG',
