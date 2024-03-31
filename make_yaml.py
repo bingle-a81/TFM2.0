@@ -12,15 +12,17 @@ path_for_base=os.path.realpath(config.get_set_default('DIR_FOR_BASE_UP'))
 
 d={}
 def serch_in_check(path_for_check):  # ищем файл в папке  со станков
-    for root, subFolder, files in os.walk(path_for_check):
-        path = root.split(os.sep)
-        print((len(path) - 1) * '---', os.path.basename(root))
-            # yield adress_file_in_check  # возвращаем адрес файла
+    for adress, dirs, files in os.walk(path_for_check):
+        for file in files:
+            adress_file_in_check = os.path.join(adress, file)
+            yield adress_file_in_check  # возвращаем адрес файла
 
 for i in serch_in_check(path_for_base):
-    print(i)
-   
+    r=i.split('\\')
+    d.setdefault(r[7],[]).append(r[-1])
 
+print(d)
+   
 quit(-1)
 def correction_of_the_line(string):  # удаляем символы кроме букв,цифр и точки
     reg = re.compile('[^a-zA-Z0-9. -]')
