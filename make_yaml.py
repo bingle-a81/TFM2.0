@@ -2,9 +2,8 @@ import os,yaml
 import time
 from logging_settings import set_logger
 from TFM_settings import config
-import re
-
-
+from working_file import ProgFile
+from pprint import pprint
 
 
 path=os.path.realpath(config.get_set_default('source')+config.get_set_default('DIR_TEMP')+config.get_set_default('YAML_FILE'))
@@ -18,37 +17,30 @@ def serch_in_check(path_for_check):  # ищем файл в папке  со с�
             yield adress_file_in_check  # возвращаем адрес файла
 
 for i in serch_in_check(path_for_base):
-    r=i.split('\\')
-    d.setdefault(r[7],[]).append(r[-1])
+    r=ProgFile(i)
+    if d.get(r.find_name()):
+        a=d.get(r.find_name())
+        if  a[0][0]==r.find_folder():
+            print('tt')
 
-print(d)
+    d.setdefault(r.find_name(),[]).append([r.find_folder(),r.find_hash()])
+
+
    
+with open(path, "w", encoding="utf-8") as f:
+    yaml.dump(d,f)
+
+d1={}
+with open(path,'r',encoding='utf-8') as f:
+    d1=yaml.load(f,Loader=yaml.FullLoader)
+
+# pprint(d1)
+
 quit(-1)
-def correction_of_the_line(string):  # удаляем символы кроме букв,цифр и точки
-    reg = re.compile('[^a-zA-Z0-9. -]')
-    a = reg.sub('', string)
-    a=a.strip()
-    a=a.rstrip('.')
-    return a
 
 
-def find_name_prog(path):  # из программы извлекаем имя файла в скобках
-    with open(path, 'r') as r:  # только чтение файла
-        i = 0
-        while i < 3:
-            st = r.readline()  # чтение текстового файла построчно
-            i += 1
-            if ('(' in st) and (')' in st):
-                f_name = st[(st.index('(') + 1):(st.index(')'))].strip()
-                f_name = correction_of_the_line(f_name).strip()
-                # logger.debug(f'name++{f_name}')
-                return f_name
-                break
-            else:
-                pass
-        else:
-            a = chenge_name(path.split('\\')[-1])  # если в файле названия нет - берем имя файла
-            return chenge_name(path.split('\\')[-1])
+
+
         
 def serch_in_check(path_for_check):  # ищем файл в папке  со станков
     for adress, dirs, files in os.walk(path_for_check):
@@ -56,11 +48,7 @@ def serch_in_check(path_for_check):  # ищем файл в папке  со с�
             adress_file_in_check = os.path.join(adress, file)
             yield adress_file_in_check  # возвращаем адрес файла
 
-def chenge_name(st=''):  # удаляем расширение файла
-    if st.rfind('.') > 0:
-        return st[0:st.rfind('.')]
-    else:
-        return st
+
 
 
 
