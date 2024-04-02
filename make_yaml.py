@@ -9,7 +9,7 @@ import simpe_functions
 
 json_logger=set_logger('json_logger')
 
-path=os.path.realpath(config.get_set_default('source')+config.get_set_default('DIR_TEMP')+config.get_set_default('YAML_FILE'))
+path=config.get_yaml_file()
 path_for_base=os.path.realpath(config.get_set_default('DIR_FOR_BASE_UP'))
 
 
@@ -44,9 +44,9 @@ make_yaml_file()
    
 
 
-d1={}
-with open(path,'r',encoding='utf-8') as f:
-    d1=yaml.load(f,Loader=yaml.FullLoader)
+# d1={}
+# with open(path,'r',encoding='utf-8') as f:
+#     d1=yaml.load(f,Loader=yaml.FullLoader)
 
 # a=d1.get('FAS4-A25-11-1').get('prog')[1][1]
 # pprint(d1)
