@@ -5,6 +5,7 @@ from logging_settings import set_logger
 from TFM_settings import config
 from working_file import ProgFile
 from pprint import pprint
+import simpe_functions
 
 json_logger=set_logger('json_logger')
 
@@ -12,15 +13,11 @@ path=os.path.realpath(config.get_set_default('source')+config.get_set_default('D
 path_for_base=os.path.realpath(config.get_set_default('DIR_FOR_BASE_UP'))
 
 
-def serch_in_check(path_for_check):  # ищем файл в папке  со станков
-    for adress, dirs, files in os.walk(path_for_check):
-        for file in files:
-            adress_file_in_check = os.path.join(adress, file)
-            yield adress_file_in_check  # возвращаем адрес файла
+
 
 def make_yaml_file():
     dict_programms={}
-    for file in serch_in_check(path_for_base):
+    for file in simpe_functions.file_search(path_for_base):
         if any(file.endswith(a) for a in
                 ['mtx','xml','txt','jpg', 'pdf', 'bin', 'PDF', 'doc', 'zip', 'lnk', 'exe', 'db', 'docx', 'png', 'bmp', 'ICO', 'bat', '0L',
                 '0C', 'gif', 'GIF','bmp','vbs','css','dtd','htm','htm','pptx','iso','sfv','prt','x_b','STEP','ipt','cdd','djvu',
