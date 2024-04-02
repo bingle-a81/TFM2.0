@@ -8,7 +8,10 @@ class ProgFile:
     def __init__(self,path) -> None:
         self._path=path
 
-    def find_name(self):
+    def get_name_file_program(self):
+        return self._path.split('\\')[-1]
+
+    def find_name_prog(self):
         try:
             with open(self._path, 'r',encoding='utf-8') as r:  # только чтение файла
                 i = 0
