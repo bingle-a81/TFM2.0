@@ -7,12 +7,12 @@ from TFM_settings import config
 from working_file import ProgFile
 import simpe_functions
 
-json_logger=set_logger('json_logger')
 
-path=config.get_yaml_file()
-path_for_base=os.path.realpath(config.get_set_default('DIR_FOR_BASE_UP'))
 
 def make_yaml_file():
+    yaml_logger=set_logger('yaml_logger')
+    path=config.get_yaml_file()
+    path_for_base=os.path.realpath(config.get_set_default('DIR_FOR_BASE_UP'))   
     dict_programms={}
     for file in simpe_functions.file_search(path_for_base):
         if any(file.endswith(a) for a in
@@ -24,10 +24,10 @@ def make_yaml_file():
             try:
                 name_prog=programma.find_name_prog()
             except Exception as f:
-                json_logger.debug(str(f)+'|'+file)
+                yaml_logger.info(str(f)+'|'+file)
             if  dict_programms.get(name_prog,False)!=False:
                 if  dict_programms.get(name_prog).get('adress')!=os.path.join(programma.find_zavod(),programma.find_folder()):
-                    json_logger.debug(file+'|'+programma.get_name_file_program())
+                    yaml_logger.info( dict_programms.get(name_prog).get('adress')+'='+file+'|'+programma.get_name_file_program())
                     continue
             dict_programms.setdefault(name_prog,{})
             dict_programms[name_prog]={'adress':os.path.join(programma.find_zavod(),programma.find_folder()),
@@ -46,7 +46,7 @@ def open_yaml_file(path):
 if __name__ == '__main__':
 
     d1={}
-    with open(path,'r',encoding='utf-8') as f:
+    with open(config.get_yaml_file(),'r',encoding='utf-8') as f:
         d1=yaml.load(f,Loader=yaml.FullLoader)
 
     pprint.pprint(d1)

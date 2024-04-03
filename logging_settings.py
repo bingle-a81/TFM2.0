@@ -72,7 +72,11 @@ logger_config = {
         'std_format': {
             'format': '{asctime} - {levelname} - {name} - {message}',
             'style': '{'
-        }
+        },
+        'yaml_format': {
+            'format': '[{message}]',
+            'style': '{'
+        }       
     },
     'handlers': {
         'console': {
@@ -87,6 +91,12 @@ logger_config = {
             'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES')+config.get_set_default('LOG_FILE'),
             'formatter': 'std_format',
         },
+        'yaml_file': {
+            '()': MegaHandler,
+            'level': 'INFO',
+            'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES')+config.get_set_default('LOG_FILE_YAML'),
+            'formatter': 'yaml_format',
+        },        
         # 'file1': {
         #     '()': MegaHandler,
         #     'level': 'DEBUG',
@@ -122,9 +132,9 @@ logger_config = {
         #     'handlers': ['console', 'file','email','telegram_handler'],
         #     # 'propagate': False
         # },
-        'json_logger': {
+        'yaml_logger': {
             'level': 'DEBUG',
-            'handlers': ['console'],
+            'handlers': ['console','yaml_file'],
         },
         # 'telega_logger': {
         #     'level': 'DEBUG',

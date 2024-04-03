@@ -7,30 +7,49 @@ from TFM_settings import config
 import join_and_transfert_tmp
 import copy_to_database
 
+def yaml_start():
+    make_yaml.make_yaml_file()
+
+def join_and_transfert_tmp_start_nomura(dc):    
+    for x in dc.values():
+        for y in x:
+            join_and_transfert_tmp.common_files_nomura(y)
+
+def join_and_transfert_tmp_start_other(dc):
+    for x in dc.values():
+        for y in x:
+            join_and_transfert_tmp.trans_other_machine(y)    
+
+def copy_to_database_start(dc):
+    ls=[]
+    for x in dc.values():
+        ls+=x
+    for x in ls:
+       copy_to_database.trans(x)
 
 
-a_log=set_logger('simple_logger')
+# a_log=set_logger('simple_logger')
 
 
 
 def start():
-    make_yaml.make_yaml_file()
-    lst1=config.get_dict_section('NCExplorer')
-    for x in lst1.values():
-        for y in x:
-            join_and_transfert_tmp.common_files_nomura(y)
-    lst2={**config.get_dict_section('PttMain'),**config.get_dict_section('FileControl'),**config.get_dict_section('other')}
-    for x in lst2.values():
-        for y in x:
-            join_and_transfert_tmp.trans_other_machine(y)
+    dict_nomura=config.get_dict_section('NCExplorer') 
+    dict_fanuc=config.get_dict_section('PttMain')   
+    dict_citizen=config.get_dict_section('FileControl')
+    dict_other=config.get_dict_section('other')
+    dict_all={**dict_nomura,**dict_fanuc,**dict_citizen,**dict_other}
 
-    lst3={**lst1,**lst2}
-    # ls=[x for x in lst3.values()]
-    ls=[]
-    for x in lst3.values():
-        ls+=x
-    for x in ls:
-       copy_to_database.trans(x)
+
+
+    # yaml_start()       
+    # # quit(-1)
+
+    # join_and_transfert_tmp_start_nomura(dict_nomura)
+    # join_and_transfert_tmp_start_other(dict_fanuc)
+    # join_and_transfert_tmp_start_other(dict_citizen)   
+    # join_and_transfert_tmp_start_other(dict_other)
+
+    copy_to_database_start(dict_all)
 
             
 
