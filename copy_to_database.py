@@ -8,7 +8,7 @@ import make_yaml
 
 # path=config.get_yaml_file()
 
-def start(machine):
+def trans(machine):
     quantity_old = 0  # счетчики
     quantity_change = 0
     quantity_new = 0
