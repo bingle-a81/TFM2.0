@@ -47,4 +47,4 @@ def copy_f(programma:ProgFile,mashine:str,progr_folder:str,up_source):
 
 
 
-start('None')
+# start('None')
