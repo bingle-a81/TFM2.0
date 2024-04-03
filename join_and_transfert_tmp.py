@@ -45,14 +45,7 @@ def trans_other_machine(machine):
         shutil.copy(file,os.path.join(os.path.join(folder_mashine_tmp)))  # клонируем папки в папку для разбора
 
         
-lst=config.get_dict_section('NCExplorer')
-for x in lst.values():
-    for y in x:
-        common_files_nomura(y)
-lst={**config.get_dict_section('PttMain'),**config.get_dict_section('FileControl'),**config.get_dict_section('other')}
-for x in lst.values():
-    for y in x:
-        trans_other_machine(y)
+
 
 # for x in lst:
 #     print(x.items())

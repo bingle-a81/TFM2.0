@@ -1,4 +1,4 @@
-import os
+import os,shutil
 
 def file_search(path):  # ищем файл в папке  со станков
     for adress, dirs, files in os.walk(path):
@@ -19,3 +19,9 @@ def file_search_in_base(path,file_name):
                     yield adress_file_in_base  # возвращаем адрес файла
     except Exception as ex:
        print(ex)  
+
+def copy_file(path_folder_kuda,path_folder_otkuda):
+    a=path_folder_otkuda.split('\\')[-1]
+    if os.path.isdir(path_folder_kuda) == False:
+        os.makedirs(path_folder_kuda)
+    shutil.copyfile(path_folder_otkuda,os.path.join(path_folder_kuda,a))    

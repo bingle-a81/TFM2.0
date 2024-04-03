@@ -1,5 +1,6 @@
 import re
 import hashlib
+import time,os
 # ------------
 from TFM_settings import config
 
@@ -8,8 +9,14 @@ class ProgFile:
     def __init__(self,path) -> None:
         self._path=path
 
+    def get_path(self):
+        return self._path
+
     def get_name_file_program(self):
         return self._path.split('\\')[-1]
+    
+    def get_date_of_change(self):
+        return time.strftime('%d.%m.%Y', time.strptime(time.ctime(os.path.getmtime(self._path))))
 
     def find_name_prog(self):
         try:
@@ -26,6 +33,9 @@ class ProgFile:
                     return self.chenge_name(self._path.split('\\')[-1])  # если в файле названия нет - берем имя файла 
         except UnicodeDecodeError as u:
             print(u)
+
+    def find_zavod(self):
+        return self._path.split('\\')[int(config.get_set_default('number_folder'))-1]            
             
     def find_folder(self):
         return self._path.split('\\')[int(config.get_set_default('number_folder'))]
@@ -58,6 +68,6 @@ class ProgFile:
 
         
 # a=ProgFile(r"\\SERVER2016\Docs\УП\УП2\Авеста\FAS4-A25-11-1 Винт\O0425")
-# print(a.find_name())
+# print(a.get_date_of_change())
 # print(a.find_hash())
 # print(a.find_folder())
