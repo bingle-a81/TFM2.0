@@ -1,5 +1,6 @@
 import os,yaml
 import time
+import pprint
 # ---------------
 from logging_settings import set_logger
 from TFM_settings import config
@@ -42,11 +43,15 @@ def open_yaml_file(path):
 
 # make_yaml_file()
    
+if __name__ == '__main__':
+
+    d1={}
+    with open(path,'r',encoding='utf-8') as f:
+        d1=yaml.load(f,Loader=yaml.FullLoader)
+
+    pprint.pprint(d1)
 
 
-# d1={}
-# with open(path,'r',encoding='utf-8') as f:
-#     d1=yaml.load(f,Loader=yaml.FullLoader)
 
 # a=d1.get('FAS4-A25-11-1').get('prog')[1][1]
 # pprint(d1)
