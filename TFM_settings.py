@@ -1,6 +1,11 @@
 from configparser import ConfigParser
 import os
 
+def picture(machine):
+    match machine:
+        case 'Nomura NN-20J2(1)':
+            return ('nom1.png','nom11.png')
+
 class Get_config():
     def __init__(self,name_file) -> None:
         self._name=name_file
