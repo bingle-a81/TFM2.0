@@ -11,7 +11,7 @@ import TFM_settings
 
 # sleep=time.sleep(5)
 py_log=set_logger('py_logger')
-py.PAUSE=0.5
+
 
 picture_folder=r'.picture\\nomura\\'
 
@@ -28,9 +28,9 @@ def double(lst:list,region=(50,50,400,400)):
     ls_loc=[]
     for x in lst:
         try:
-            # sleep(1)
+            sleep(1)
             a=py.locateOnScreen(os.path.join(picture_folder,x),region=region, confidence=0.95)
-            # sleep(1)
+            sleep(1)
         except:
             continue
         ls_loc.append(a)
@@ -88,7 +88,7 @@ def trans_nc_explorer(machine):
         a=os.path.join(picture_folder, 'subnet.png')
         py_log.info('open subnet')
         double_click(py.locateOnScreen(a,region=(100,100,400,400), confidence=0.5))
-        # left_click((719, 400))
+        left_click((1300, 400))
     lst=[(TFM_settings.picture(machine.strip())),
             ('cnc_mem1.png','cnc_mem2.png','cnc_mem3.png','cnc_mem4.png','cnc_mem5.png','cnc_mem6.png'),
         ('prg1.png','prg2.png','prg3.png','prg4.png'),
@@ -119,35 +119,52 @@ def trans_nc_explorer(machine):
     else:
         py_log.info('galka est')
     py.leftClick(234, 172,duration=0.25)  # первая программа
+    py_log.info('первая программа')
     sleep(1)
     keyboard.press('shift')
     sleep(1)
-    py.moveTo(234, 518,duration=0.25)
+    # py.moveTo(234, 518)
     py.leftClick(234, 518)  # последняя программа
     keyboard.release('shift')
     sleep(1)
-    keyboard.press_and_release('ctrl + c')
+    keyboard.press('ctrl + c')
     sleep(1)
+    keyboard.release('ctrl + c')
+    # py_log.info('копирование')
+    sleep(1)
+    left_click(py.locateOnScreen(os.path.join(picture_folder,'vihod.png'),region=(1868,0,1915,40), confidence=0.95))
+    py_log.info('закрываем станок') 
     os.startfile(os.path.join(TFM_settings.config.get_set_default('source'),machine))
+
     sleep(3)
-    if find_picture(('folder_user.png',),region=(0,0,150,20))==True:
+    if find_picture(('kolonki.png','kolonki1.png'),region=(1800,900,1920,1050))==False:
         keyboard.press_and_release('win + up')
-        py_log.info('шапки папки нет win+up')
+        py_log.info('колонки папки не нашли win+up')
+    else:
+        py_log.info('папка открыта на полную')    
+    left_click((268, 558))    
     sleep(3)
-    keyboard.press_and_release('ctrl + v')
+    keyboard.press('ctrl + v')
+    sleep(1)
+    keyboard.release('ctrl + v')
     sleep(3)
     if find_picture(('konflicti.png',),region=(730,690,820,750))==True:
+        py_log.info('в папке есть программы')
         a=py.locateOnScreen(os.path.join(picture_folder,'konflicti.png'),region=(730,690,820,750), confidence=0.95)
+        py_log.info('галка конфликты')
         left_click(a)
         a=py.locateOnScreen(os.path.join(picture_folder,'kopir_zamena.png'),region=(730,350,950,430), confidence=0.95)
         left_click(a)
-    py_log.info('галка конфликты')
+    else:
+        py_log.info('папка пустая')
+    
     sleep(1)
     py.leftClick(860, 462,duration=0.25)
-    sleep(10)
+    sleep(10)    
     left_click(py.locateOnScreen(os.path.join(picture_folder,'vihod.png'),region=(1868,0,1915,40), confidence=0.95))
-    left_click(py.locateOnScreen(os.path.join(picture_folder,'vihod1.png'),region=(1868,0,1915,40), confidence=0.95))
     sleep(2)
+   
+    py_log.info('программы скачаны')
 
 
 
