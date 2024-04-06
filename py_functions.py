@@ -8,11 +8,13 @@ from logging_settings import set_logger
 
 
 class MachinePyautogui:
-    def __init__(self) -> None:
-        # self._name=name
+    def __init__(self,name,pic_folder) -> None:
+        self.__name=name
         self._log=set_logger('py_logger')
-        self.__picture_folder=r'.picture\\nomura\\'
+        self.__picture_folder=pic_folder
+        
         self.__othod=(1300, 400)
+        self._log.info('начинаем: '+self.__name)
 
     @staticmethod
     def format_point(point):
@@ -22,6 +24,10 @@ class MachinePyautogui:
         py.moveTo(point)
         py.doubleClick(point,button='LEFT',duration=0.25)
         self._log.info('дважды нажата кнопка: '+self.format_point(point))
+
+    def right_click(self,point):
+        py.rightClick(point,duration=0.25)
+        self._log.info('один раз нажата правая кнопка: '+self.format_point(point))  
 
 
     def left_click(self,point,):

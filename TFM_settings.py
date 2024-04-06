@@ -5,6 +5,38 @@ def picture(machine):
     match machine:
         case 'Nomura NN-20J2(1)':
             return ('nom1.png','nom11.png')
+        case 'Nomura NN-20J2(2)':
+            return ('nom2.png','nom22.png')
+        case 'Nomura NN-20J2(3)':
+            return ('nom3.png','nom33.png')      
+        case 'Nomura NN-20J3(4)':
+            return ('nom4.png','nom44.png')    
+        case 'Nomura NN-20J3(5)':
+            return ('nom5.png','nom55.png')         
+        case 'Nomura NN-20J3XB80(6)':
+            return ('nom6.png','nom66.png')            
+        case 'Nomura NN-10E':
+            return ('nom10.png','nom110.png')     
+        case 'Nexturn SA-26PY':
+            return ('next261.png',)                   
+        case 'Miyano BNJ-42SY':
+            return ('miano.png',)    
+        case 'Hanhwa XD20H':
+            return ('hanva.png',)   
+        case 'Colchester T8MSY':
+            return ('colchester.png',)              
+        case 'Nexturn SA-12B(1)':
+            return ('next1.png',)    
+        case 'Nexturn SA-12B(2)':
+            return ('nex2.png',)       
+        case 'Tsugami SS267-III':
+            return ('tsug267.png',)    
+        case 'Tsugami M08SY-II':
+            return ('tsu08.png',)                      
+        case 'Tsugami BO126TF-III':
+            return ('ts126.png',)   
+        case '_'                              :
+            print('нет такого станка')
 
 class Get_config():
     def __init__(self,name_file) -> None:

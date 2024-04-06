@@ -6,9 +6,20 @@ from logging_settings import set_logger
 from TFM_settings import config
 import join_and_transfert_tmp
 import copy_to_database
+import pyauto
 
 def yaml_start():
     make_yaml.make_yaml_file()
+
+def pyauto_start_nomura(dc):    
+    for x in dc.values():
+        for y in x:
+            pyauto.trans_nc_explorer(y)
+
+def pyauto_start_fanuc(dc):    
+    for x in dc.values():
+        for y in x:
+            pyauto.program_transfer_tool(y)
 
 def join_and_transfert_tmp_start_nomura(dc):    
     for x in dc.values():
@@ -44,12 +55,15 @@ def start():
     # yaml_start()       
     # # quit(-1)
 
+    # pyauto_start_nomura(dict_nomura)
+    pyauto_start_fanuc(dict_fanuc)
+
     # join_and_transfert_tmp_start_nomura(dict_nomura)
     # join_and_transfert_tmp_start_other(dict_fanuc)
     # join_and_transfert_tmp_start_other(dict_citizen)   
     # join_and_transfert_tmp_start_other(dict_other)
 
-    copy_to_database_start(dict_all)
+    # copy_to_database_start(dict_all)
 
             
 
