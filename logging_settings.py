@@ -76,7 +76,11 @@ logger_config = {
         'yaml_format': {
             'format': '[{message}]',
             'style': '{'
-        }       
+        },
+        'py_format': {
+            'format': '[{message}]',
+            'style': '{'
+        }           
     },
     'handlers': {
         'console': {
@@ -85,6 +89,12 @@ logger_config = {
             'formatter': 'std_format',
             # 'filters': ['new_filter'],
         },
+        'py_console': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+            'formatter': 'py_format',
+            # 'filters': ['new_filter'],
+        },        
         'file': {
             '()': MegaHandler,
             'level': 'INFO',
@@ -140,10 +150,10 @@ logger_config = {
         #     'level': 'DEBUG',
         #     'handlers': ['telegram_handler'],
         # },
-        # 'pyautogui_logger': {
-        #     'level': 'DEBUG',
-        #     'handlers': ['console', 'file', 'file1'],
-        # },
+        'py_logger': {
+            'level': 'DEBUG',
+            'handlers': ['py_console'],
+        },
         # 'to_database_logger': {
         #     'level': 'DEBUG',
         #     'handlers': ['console', 'file', 'file1'],
