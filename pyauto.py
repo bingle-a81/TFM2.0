@@ -13,69 +13,42 @@ from py_functions import MachinePyautogui
 # sleep=time.sleep(5)
 py_log=set_logger('py_logger')
 
-def sitizen(a,dict1):
-    picture_link = r'c:\Users\Programmer\PycharmProjects\Transfer_From_Machine\picture'
+def transfer_sitizen(machine):
+    
+    picture_folder=r'.picture\\citizen\\'
+    foo=MachinePyautogui(machine,picture_folder)
+
     for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
         process.kill()
         sleep(4)
-
     os.startfile(r'C:\Program Files (x86)\FileControl\FileControl.exe')
-
     sleep(3)
 
-    pyautogui.leftClick(1220, 340,duration=0.25)
-
+    if foo.find_picture(('citizen_object.png',),region=(1000,300,1260,380)):
+        foo.simple_left_click(foo.find_picture(('citizen_object_galka.png',),region=(1000,300,1260,350)))
+        # foo.open_pic_folder(('citizen_object_galka.png',),region=(1000,300,1260,360),click=1)
+    foo.simple_left_click(foo.find_picture(TFM_settings.picture(machine.strip()),region=(1000,300,1260,350)))
+    foo.simple_left_click(foo.find_picture(('citizen_edit.png',),region=(650,270,780,300)))
+    if foo.find_picture(('citizen_select_all_machine.png',),region=(700,280,920,380)):
+            foo.simple_left_click((723, 331))
     sleep(2)
-    pyautogui.leftClick(dict1.get('machine'),duration=0.25)
-
+    foo.simple_left_click(foo.find_picture(('citizen_change.png',),region=(850,310,970,360)))
+    if foo.find_picture(TFM_settings.picture(machine.strip()),region=(950,450,1200,620)):
+        a=foo.find_picture(TFM_settings.picture(machine.strip()),region=(950,450,1200,620))
+        print(a)
+        foo.simple_left_click(foo.find_picture(('citizen_folder111.png','citizen_folder1111.png'),region=a))
     sleep(2)
-    pyautogui.leftClick(943, 338,duration=0.25)
-
-    sleep(2)
-    for x in range(3):
-        pyautogui.leftClick(1096, 599)
-        logger.debug('клик вниз')
-        sleep(1)
-    pic_machine = next((item for item in list(
-        map(lambda x: pyautogui.locateCenterOnScreen(x), dict1.get('pic_machine_lst'))) if item is not None), None)
-    logger.debug(f'вывод = {pic_machine}')
-    i=0
-    while pic_machine==None:
-        sleep(0.1)
-        for x in  dict1.get('pic_machine_lst'):
-            pic_machine=pyautogui.locateCenterOnScreen(x)
-            if pic_machine!=None:
-                break
-            else:
-                i += 1
-                logger.debug(f'счетчик {i} pic2={pic_machine}')
-        if i>10 :
-            logger.debug(f'станок {a} не открывается')
-            return
-    pyautogui.moveTo(pic_machine)
-    pyautogui.leftClick(pic_machine,duration=0.25)
-    logger.debug(f'выбор папки {a}')
-    pyautogui.leftClick(1002, 660,duration=0.25)
-    logger.debug('кнопка ок')
-    sleep(2)
-    pyautogui.leftClick(717, 288,duration=0.25)
-    logger.debug('edit')
-    sleep(2)
-    pyautogui.leftClick(767, 334,duration=0.25)
-    logger.debug(f'select all on machine {a}')
-    sleep(2)
-    pyautogui.leftClick(999, 676,duration=0.25)
-    logger.debug('transfer to pc')
-    sleep(2)
-    pyautogui.leftClick(1012, 572,duration=0.25)
-    logger.debug('да')
-    sleep(2)
-    pyautogui.leftClick(927, 615,duration=0.25)
-    logger.debug('хз')
-    sleep(55)
+    foo.simple_left_click(foo.find_picture(('citizen_folder_ok.png',),region=(900,600,1200,700)))
+    foo.simple_left_click(foo.find_picture(('citizen_transfer_to_pc.png',),region=(900,650,1200,750)))
+    foo.simple_left_click(foo.find_picture(('citizen_select_all_machine_yes.png',),region=(950,500,1200,750)))
+    sleep(10)
+    if foo.find_picture(('citizen_all_overwrite.png',),region=(700,500,1050,700)):
+        foo.simple_left_click(foo.find_picture(('citizen_all_overwrite.png',),region=(700,500,1050,700)))
+    sleep(40)
     for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
         process.kill()
-    return True
+    
+
 
 
 
@@ -99,8 +72,8 @@ def transfer_fanuc(foo):
 
 
 def program_transfer_tool(machine):
-    p=r'.picture\\fanuc\\'
-    foo=MachinePyautogui(machine,p)
+    picture_folder=r'.picture\\fanuc\\'
+    foo=MachinePyautogui(machine,picture_folder)
     picture = r'c:\Users\Programmer\PycharmProjects\Transfer_From_Machine\picture\fanuc_last_mod.png'
     for process in (process for process in psutil.process_iter() if process.name() == "PttMain.exe"):
         process.kill()
@@ -135,8 +108,8 @@ def program_transfer_tool(machine):
 
    
 def trans_nc_explorer(machine):
-    p=r'.picture\\nomura\\'
-    foo=MachinePyautogui(machine,p)
+    picture_folder=r'.picture\\nomura\\'
+    foo=MachinePyautogui(machine,picture_folder)
 
     if windll.user32.OpenClipboard(None):
         windll.user32.EmptyClipboard()

@@ -29,6 +29,11 @@ class MachinePyautogui:
         py.rightClick(point,duration=0.25)
         self._log.info('один раз нажата правая кнопка: '+self.format_point(point))  
 
+    def simple_left_click(self,point,):
+        py.moveTo(point, duration=0.25)
+        py.leftClick(point, duration=0.25) 
+        self._log.info('один раз нажата кнопка без отхода: '+self.format_point(point))     
+
 
     def left_click(self,point,):
         py.moveTo(point, duration=0.25)
@@ -72,7 +77,7 @@ class MachinePyautogui:
             sleep(1)
             if a :
                 self._log.info('найден '+x)  
-                return True 
+                return a #True
         self._log.info('pic не найдены '+self.format_point(lst))  
         return False
             

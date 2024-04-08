@@ -6,4 +6,4 @@ import os
 keyboard.wait('space')
 print (win32api.GetCursorPos())      
 
-                       
+                                     

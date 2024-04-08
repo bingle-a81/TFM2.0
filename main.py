@@ -21,6 +21,11 @@ def pyauto_start_fanuc(dc):
         for y in x:
             pyauto.program_transfer_tool(y)
 
+def pyauto_start_citizen(dc):    
+    for x in dc.values():
+        for y in x:
+            pyauto.transfer_sitizen(y)            
+
 def join_and_transfert_tmp_start_nomura(dc):    
     for x in dc.values():
         for y in x:
@@ -56,7 +61,7 @@ def start():
     # # quit(-1)
 
     # pyauto_start_nomura(dict_nomura)
-    pyauto_start_fanuc(dict_fanuc)
+    pyauto_start_citizen(dict_citizen)
 
     # join_and_transfert_tmp_start_nomura(dict_nomura)
     # join_and_transfert_tmp_start_other(dict_fanuc)

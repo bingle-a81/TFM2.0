@@ -35,6 +35,10 @@ def picture(machine):
             return ('tsu08.png',)                      
         case 'Tsugami BO126TF-III':
             return ('ts126.png',)   
+        case 'Citizen Cincom L12(1)':
+            return ('citizen_machine1.png','citizen_folder1.png','citizen_folder11.png')           
+        case 'Citizen Cincom L12(2)':
+            return ('citizen_machine2.png','citizen_folder2.png','citizen_folder22.png')          
         case '_'                              :
             print('нет такого станка')
 
