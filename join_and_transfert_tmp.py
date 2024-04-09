@@ -5,7 +5,8 @@ import simpe_functions
 
    
 
-def common_files_nomura(machine):
+def common_files_nomura(folder,machines):
+    for machine in machines:
     folder_mashine_tmp=os.path.join(config.get_set_default('source'),config.get_set_default('DIR_TEMP'),machine)
     folder_mashine=os.path.join(config.get_set_default('source'),machine)
     simpe_functions.mk_folder(folder_mashine_tmp)
