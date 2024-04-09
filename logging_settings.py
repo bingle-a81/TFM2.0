@@ -3,6 +3,7 @@ import logging.config
 import smtplib
 import telebot
 from TFM_settings import config
+import time
 
 
 
@@ -98,21 +99,21 @@ logger_config = {
         'file': {
             '()': MegaHandler,
             'level': 'INFO',
-            'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES')+config.get_set_default('LOG_FILE'),
+            'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES') +time.strftime("%H.%M-%d.%m.%Y-", time.localtime())+config.get_set_default('LOG_FILE'),
             'formatter': 'std_format',
         },
         'yaml_file': {
             '()': MegaHandler,
             'level': 'INFO',
-            'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES')+config.get_set_default('LOG_FILE_YAML'),
+            'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES') +time.strftime("%H.%M-%d.%m.%Y-", time.localtime())+config.get_set_default('LOG_FILE_YAML'),
             'formatter': 'yaml_format',
         },        
-        # 'file1': {
-        #     '()': MegaHandler,
-        #     'level': 'DEBUG',
-        #     'filename': set.LOG_FILE_DEBUG,
-        #     'formatter': 'std_format',
-        # },
+        'py_file': {
+            '()': MegaHandler,
+            'level': 'INFO',
+            'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES') +time.strftime("%H.%M-%d.%m.%Y-", time.localtime())+config.get_set_default('LOG_FILE_PYAUTOGUI'),
+            'formatter': 'yaml_format',
+        },  
         'email':{
             '()':MegaEmail,
             'level': 'DEBUG',
@@ -124,7 +125,7 @@ logger_config = {
         },
         'telegram_handler': {
             '()': TelegramBotHandler,
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'chat_id': config.get_set_default('chat_id_telega'),
             'token': config.get_set_default('token_telega'),
             'formatter': 'std_format',
@@ -137,23 +138,22 @@ logger_config = {
             'handlers': ['console'],
             # 'propagate': False
         },        
-        # 'app_logger': {
-        #     'level': 'DEBUG',
-        #     'handlers': ['console', 'file','email','telegram_handler'],
-        #     # 'propagate': False
-        # },
         'yaml_logger': {
             'level': 'DEBUG',
-            'handlers': ['console','yaml_file'],
+            'handlers': ['console','yaml_file','telegram_handler'],
         },
-        # 'telega_logger': {
-        #     'level': 'DEBUG',
-        #     'handlers': ['telegram_handler'],
-        # },
+        'telega_logger': {
+            'level': 'WARNING',
+            'handlers': ['telegram_handler'],
+        },
         'py_logger': {
             'level': 'DEBUG',
-            'handlers': ['py_console'],
+            'handlers': ['py_console','py_file'],
         },
+        'base_logger': {
+            'level': 'DEBUG',
+            'handlers': ['console','file'],
+        },       
         # 'to_database_logger': {
         #     'level': 'DEBUG',
         #     'handlers': ['console', 'file', 'file1'],

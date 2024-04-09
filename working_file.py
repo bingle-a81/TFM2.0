@@ -19,20 +19,20 @@ class ProgFile:
         return time.strftime('%d.%m.%Y', time.strptime(time.ctime(os.path.getmtime(self._path))))
 
     def find_name_prog(self):
-        try:
-            with open(self._path, 'r',encoding='utf-8') as r:  # только чтение файла
-                i = 0
-                while i < 3:
-                    st = r.readline()  # чтение текстового файла построчно
-                    i += 1
-                    if ('(' in st) and (')' in st):
-                        f_name = st[(st.index('(') + 1):(st.index(')'))].strip()
-                        f_name = self.correction_name(f_name).strip()
-                        return f_name
-                else:
-                    return self.chenge_name(self._path.split('\\')[-1])  # если в файле названия нет - берем имя файла 
-        except UnicodeDecodeError as u:
-            print(u)
+        # try:
+        with open(self._path, 'r',encoding='utf-8') as r:  # только чтение файла
+            i = 0
+            while i < 3:
+                st = r.readline()  # чтение текстового файла построчно
+                i += 1
+                if ('(' in st) and (')' in st):
+                    f_name = st[(st.index('(') + 1):(st.index(')'))].strip()
+                    f_name = self.correction_name(f_name).strip()
+                    return f_name
+            else:
+                return self.chenge_name(self._path.split('\\')[-1])  # если в файле названия нет - берем имя файла 
+        # except UnicodeDecodeError as u:
+        #     print(u)
 
     def find_zavod(self):
         return self._path.split('\\')[int(config.get_set_default('number_folder'))-1]            

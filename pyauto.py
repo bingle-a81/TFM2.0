@@ -13,6 +13,8 @@ from py_functions import MachinePyautogui
 # sleep=time.sleep(5)
 py_log=set_logger('py_logger')
 
+
+
 def transfer_sitizen(machine):
     
     picture_folder=r'.picture\\citizen\\'
@@ -47,6 +49,7 @@ def transfer_sitizen(machine):
     sleep(40)
     for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
         process.kill()
+    sleep(3)
     
 
 
@@ -171,8 +174,9 @@ def trans_nc_explorer(machine):
     sleep(3)
     foo.hotkey('ctrl + v')
     sleep(3)
-    if foo.find_picture(('konflicti.png',),region=(730,690,820,750))==True:
+    if foo.find_picture(('konflicti.png',),region=(730,690,820,750)):
         foo.open_pic_folder(('konflicti.png',),region=(730,690,820,750),click=1)
+        sleep(2)
         foo.open_pic_folder(('kopir_zamena.png',),region=(730,350,950,430),click=1)
     
     sleep(1)

@@ -10,7 +10,10 @@ import simpe_functions
 
 
 def make_yaml_file():
+    count_mistake_file=0
+
     yaml_logger=set_logger('yaml_logger')
+
     path=config.get_yaml_file()
     path_for_base=os.path.realpath(config.get_set_default('DIR_FOR_BASE_UP'))   
     dict_programms={}
@@ -25,14 +28,18 @@ def make_yaml_file():
                 name_prog=programma.find_name_prog()
             except Exception as f:
                 yaml_logger.info(str(f)+'|'+file)
+                count_mistake_file+=1
             if  dict_programms.get(name_prog,False)!=False:
                 if  dict_programms.get(name_prog).get('adress')!=os.path.join(programma.find_zavod(),programma.find_folder()):
-                    yaml_logger.info( dict_programms.get(name_prog).get('adress')+'='+file+'|'+programma.get_name_file_program())
+                    yaml_logger.info( dict_programms.get(name_prog).get('adress')+'='+file+'|'+programma.get_name_file_program())  
+                    count_mistake_file+=1                  
                     continue
             dict_programms.setdefault(name_prog,{})
             dict_programms[name_prog]={'adress':os.path.join(programma.find_zavod(),programma.find_folder()),
                                         'prog':dict_programms[name_prog].get('prog',[])+[list_prog]}
-            
+
+    yaml_logger.warning(f'кол-во файлов не в своих папках {count_mistake_file}')
+    time.sleep(5)
     with open(path, "w", encoding="utf-8") as f:
         yaml.dump(dict_programms,f)
 
