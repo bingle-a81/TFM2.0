@@ -42,7 +42,7 @@ def trans(machine):
             base_logger.debug(f'новая программа {name_file_from_machine}') 
             copy_f(programma,machine, programma.find_name_prog(),new_source)
             quantity_new +=1
-    base_logger.warning(f'старых файлов= {quantity_old} \n измененных файлов= {quantity_change} \n новых файлов= {quantity_new}\n всего файлов= {quantity_new + quantity_old + quantity_change} ')
+    base_logger.info(f'{machine}\n старых файлов= {quantity_old} \n измененных файлов= {quantity_change} \n новых файлов= {quantity_new}\n всего файлов= {quantity_new + quantity_old + quantity_change} ')
 
 
 
