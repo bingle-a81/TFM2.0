@@ -28,8 +28,8 @@ def trans(machine):
             lst=dict_programms.get(name_file_from_machine).get('prog')
             for x in lst:
                 if programma.find_hash()==x[1]:   
-                        quantity_old+=1                     
-                        base_logger.debug(name_file_from_machine,f'({x[0]})','=найдено:',programma.find_hash(),'--',x[1])
+                        quantity_old+=1    
+                        base_logger.debug(f'{name_file_from_machine} ({x[0]}) =найдено:,{programma.find_hash()}--{x[1]}')
                         break
             else:
                 # TODO(запись в базу уп)  

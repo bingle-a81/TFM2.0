@@ -98,7 +98,7 @@ logger_config = {
         },        
         'file': {
             '()': MegaHandler,
-            'level': 'INFO',
+            'level': 'DEBUG',
             'filename':config.get_set_default('source')+ config.get_set_default('DIR_LOG_FILES') +time.strftime("%H.%M-%d.%m.%Y-", time.localtime())+config.get_set_default('LOG_FILE'),
             'formatter': 'std_format',
         },
@@ -152,7 +152,7 @@ logger_config = {
         },
         'base_logger': {
             'level': 'DEBUG',
-            'handlers': ['console','file'],
+            'handlers': ['py_console','file'],
         },       
         # 'to_database_logger': {
         #     'level': 'DEBUG',
