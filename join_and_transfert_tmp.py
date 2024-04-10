@@ -6,11 +6,11 @@ import simpe_functions
    
 
 def common_files_nomura(folder,machines):
-    for machine in machines:
-        folder_mashine_tmp=os.path.join(config.get_set_default('source'),config.get_set_default('DIR_TEMP'),folder)
-        folder_mashine=os.path.join(config.get_set_default('source'),machine)
-        simpe_functions.mk_folder(folder_mashine_tmp)
-        simpe_functions.mk_folder(folder_mashine)
+    folder_mashine_tmp=os.path.join(config.get_set_default('source'),config.get_set_default('DIR_TEMP'),folder)
+    simpe_functions.mk_folder(folder_mashine_tmp)
+    for machine in machines:        
+        folder_mashine=os.path.join(config.get_set_default('source'),machine)        
+        # simpe_functions.mk_folder(folder_mashine)
         for file in simpe_functions.file_search(folder_mashine):  # ищем файл в папке  со станков
             file_name = file.split('\\')[-1]  # имя файла файла со станков
             if '$2' not in file_name:
@@ -41,7 +41,7 @@ def trans_other_machine(folder,machines):
         folder_mashine_tmp=os.path.join(config.get_set_default('source'),config.get_set_default('DIR_TEMP'),folder)
         folder_mashine=os.path.join(config.get_set_default('source'),machine)
         simpe_functions.mk_folder(folder_mashine_tmp)
-        simpe_functions.mk_folder(folder_mashine)
+        # simpe_functions.mk_folder(folder_mashine)
 
         for file in simpe_functions.file_search(folder_mashine):  # ищем файл в папке  со станков
             shutil.copy(file,os.path.join(os.path.join(folder_mashine_tmp)))  # клонируем папки в папку для разбора

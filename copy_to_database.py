@@ -43,7 +43,8 @@ def trans(machine):
             copy_f(programma,machine, programma.find_name_prog(),new_source)
             quantity_new +=1
     base_logger.info(f'{machine}\n старых файлов= {quantity_old} \n измененных файлов= {quantity_change} \n новых файлов= {quantity_new}\n всего файлов= {quantity_new + quantity_old + quantity_change} ')
-
+    p='-'*30
+    base_logger.debug(f'#{p}#')
 
 
 def copy_f(programma:ProgFile,mashine:str,progr_folder:str,up_source):
