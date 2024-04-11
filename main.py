@@ -84,12 +84,12 @@ def start():
     time.sleep(a)
 
     change_keyboard_layout()
-    # pyauto_start_nomura(dict_nomura)
-    # time.sleep(a)
-    # pyauto_start_fanuc(dict_fanuc)
-    # time.sleep(a)
-    # pyauto_start_citizen(dict_citizen)
-    # time.sleep(a)
+    pyauto_start_nomura(dict_nomura)
+    time.sleep(a)
+    pyauto_start_fanuc(dict_fanuc)
+    time.sleep(a)
+    pyauto_start_citizen(dict_citizen)
+    time.sleep(a)
 
     join_and_transfert_tmp_start_nomura(dict_nomura)
     join_and_transfert_tmp_start_other(dict_fanuc)

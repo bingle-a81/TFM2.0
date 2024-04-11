@@ -41,13 +41,11 @@ def trans(machine):
                         base_logger.debug(f'{name_file_from_machine} ({x[0]}) =найдено:,{programma.find_hash()}--{x[1]}')
                         break
             else:
-                # TODO(запись в базу уп)  
                 base_logger.debug(f'измененая программа {name_file_from_machine}')              
                 copy_f(programma,machine,dict_programms.get(name_file_from_machine).get('adress'),up_source)   
                 quantity_change +=1  
             
         else:
-            # up_source=source+config.get_set_default('PATH_FOR_COPY_NEW_FILES')
             base_logger.debug(f'новая программа {name_file_from_machine}') 
             copy_f(programma,machine, programma.find_name_prog(),new_source)
             quantity_new +=1
@@ -68,7 +66,3 @@ def copy_f(programma:ProgFile,mashine:str,progr_folder:str,up_source):
     simpe_functions.copy_file(path_progr,programma.get_path())
     simpe_functions.copy_file(path_arhive_progr,programma.get_path())
      
-
-
-
-# start('None')

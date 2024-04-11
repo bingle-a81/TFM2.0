@@ -1,6 +1,5 @@
 import os,yaml
 import time
-import pprint
 # ---------------
 from logging_settings import set_logger
 from TFM_settings import config
@@ -31,50 +30,31 @@ def make_yaml_file():
             except Exception as f:
                 yaml_logger.info(str(f)+'|'+file)
                 count_mistake_file+=1
-                programs_with_error.add(programma.get_name_file_program())
+                # programs_with_error.add(programma.get_name_file_program())
             if  dict_programms.get(name_prog,False)!=False:
                 if  dict_programms.get(name_prog).get('adress')!=os.path.join(programma.find_zavod(),programma.find_folder()):
                     yaml_logger.info( dict_programms.get(name_prog).get('adress')+'='+file+'|'+programma.get_name_file_program())  
                     count_mistake_file+=1   
-                    programs_with_error.add(programma.find_name_prog())               
+                    programs_with_error.add(name_prog)               
                     continue
             dict_programms.setdefault(name_prog,{})
             dict_programms[name_prog]={'adress':os.path.join(programma.find_zavod(),programma.find_folder()),
                                         'prog':dict_programms[name_prog].get('prog',[])+[list_prog]}
 
-    # yaml_logger.warning(f'кол-во файлов не в своих папках {count_mistake_file}')
+    yaml_logger.warning(f'кол-во файлов не в своих папках {count_mistake_file}')
     time.sleep(5)
     with open(path, "w", encoding="utf-8") as f:
         yaml.dump(dict_programms,f)
 
-    print(programs_with_error)
+
     with open(path_yaml_error, "w", encoding="utf-8") as f:
         yaml.safe_dump(programs_with_error,f)        
 
-    s=open_yaml_file(config.get_yaml_file('YAML_FILE_ERROR'))
-    print(s)
 
 def open_yaml_file(path):
     with open(path,'r',encoding='utf-8') as f:
         return yaml.load(f,Loader=yaml.FullLoader)    
 
 
-# make_yaml_file()
-   
-if __name__ == '__main__':
-
-    d1={}
-    with open(config.get_yaml_file(),'r',encoding='utf-8') as f:
-        d1=yaml.load(f,Loader=yaml.FullLoader)
-
-    pprint.pprint(d1)
-
-
-
-# a=d1.get('FAS4-A25-11-1').get('prog')[1][1]
-# pprint(d1)
-# print(a)
-
-# quit(-1)
 
 
