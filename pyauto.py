@@ -2,9 +2,10 @@ import os
 from time import sleep
 import keyboard
 from ctypes import windll
-import win32api
+# import win32api
 from subprocess import Popen, PIPE
 import psutil
+import AppOpener
 # -------------------
 from logging_settings import set_logger
 import TFM_settings
@@ -19,12 +20,18 @@ def transfer_sitizen(machine):
     
     picture_folder=r'.picture\\citizen\\'
     foo=MachinePyautogui(machine,picture_folder)
+    # AppOpener.open("filecontrol")
+    # Popen([r'C:\Program Files (x86)\FileControl\FileControl.exe'])
+    # sleep(10)
 
     for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
         process.kill()
         sleep(4)
-    os.startfile(r'C:\Program Files (x86)\FileControl\FileControl.exe')
-    sleep(3)
+
+    Popen([r'C:\Program Files (x86)\FileControl\FileControl.exe'])
+    # os.startfile(r'C:\Program Files (x86)\FileControl\FileControl.exe')
+    sleep(6)
+
 
     if foo.find_picture(('citizen_object.png',),region=(1000,300,1260,380)):
         foo.simple_left_click(foo.find_picture(('citizen_object_galka.png',),region=(1000,300,1260,350)))
@@ -49,7 +56,9 @@ def transfer_sitizen(machine):
     sleep(40)
     for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
         process.kill()
-    sleep(3)
+    # AppOpener.close("filecontrol")
+    # foo.simple_left_click((1226, 261))
+    sleep(5)
     
 
 

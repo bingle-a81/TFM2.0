@@ -79,17 +79,18 @@ def start():
     dict_other=config.get_dict_section('other')
     dict_all={**dict_nomura,**dict_fanuc,**dict_citizen,**dict_other}
 
-    time.sleep(a)
-    yaml_start()       
-    time.sleep(a)
+    # time.sleep(a)
+    # yaml_start()       
+    # time.sleep(a)
 
     change_keyboard_layout()
+    pyauto_start_citizen(dict_citizen)
+    time.sleep(a)    
     pyauto_start_nomura(dict_nomura)
     time.sleep(a)
     pyauto_start_fanuc(dict_fanuc)
     time.sleep(a)
-    pyauto_start_citizen(dict_citizen)
-    time.sleep(a)
+
 
     join_and_transfert_tmp_start_nomura(dict_nomura)
     join_and_transfert_tmp_start_other(dict_fanuc)
