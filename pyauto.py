@@ -155,11 +155,8 @@ def trans_nc_explorer(machine):
     foo.left_click((234, 172))  # первая программа
     sleep(1)
     keyboard.press('shift')
-    sleep(1)
     foo.left_click((234, 518))  # последняя программа
     keyboard.release('shift')
-    sleep(1)
-
     foo.hotkey('ctrl + c')
 
     sleep(1)

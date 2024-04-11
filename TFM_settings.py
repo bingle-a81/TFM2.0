@@ -67,8 +67,8 @@ class Get_config():
     def get_dict_section(self,section):
         return {k:v.split('|') for k,v in self.cfg[section].items()}
     
-    def get_yaml_file(self):
-        return os.path.realpath(config.get_set_default('source')+config.get_set_default('DIR_TEMP')+config.get_set_default('YAML_FILE'))
+    def get_yaml_file(self,file_name):
+        return os.path.realpath(config.get_set_default('source')+config.get_set_default('DIR_TEMP')+config.get_set_default(file_name))
 
 
 

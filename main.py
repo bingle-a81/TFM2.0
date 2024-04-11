@@ -1,5 +1,6 @@
 
 import os,time,shutil
+import py_win_keyboard_layout
 # --------------
 import make_yaml
 from logging_settings import set_logger
@@ -65,6 +66,10 @@ def copy_to_database_start(dc):
     for x in dc:
         copy_to_database.trans(x)
 
+def change_keyboard_layout():
+    py_win_keyboard_layout.change_foreground_window_keyboard_layout(0x04090409)
+
+
 @counter
 def start():
     a=5
@@ -78,12 +83,13 @@ def start():
     yaml_start()       
     time.sleep(a)
 
-    pyauto_start_nomura(dict_nomura)
-    time.sleep(a)
-    pyauto_start_fanuc(dict_fanuc)
-    time.sleep(a)
-    pyauto_start_citizen(dict_citizen)
-    time.sleep(a)
+    change_keyboard_layout()
+    # pyauto_start_nomura(dict_nomura)
+    # time.sleep(a)
+    # pyauto_start_fanuc(dict_fanuc)
+    # time.sleep(a)
+    # pyauto_start_citizen(dict_citizen)
+    # time.sleep(a)
 
     join_and_transfert_tmp_start_nomura(dict_nomura)
     join_and_transfert_tmp_start_other(dict_fanuc)
@@ -95,6 +101,7 @@ def start():
 # -----------------------------------------------------------------------
 if __name__ == '__main__':
     start()
+
 
 
 

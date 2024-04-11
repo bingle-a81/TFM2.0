@@ -14,16 +14,25 @@ def trans(machine):
     quantity_old = 0  # счетчики
     quantity_change = 0
     quantity_new = 0
+    quantity_err = 0
     base_logger.debug(f'старт {machine}')
     source=config.get_set_default('source')
     new_source=source+config.get_set_default('PATH_FOR_COPY_NEW_FILES')
+    err_source=source+config.get_set_default('PATH_FOR_COPY_ERR_FILES')
     up_source=config.get_set_default('DIR_FOR_BASE_UP')
     folder_machine_tmp=os.path.join(source,config.get_set_default('DIR_TEMP'),machine)
-
-    dict_programms=make_yaml.open_yaml_file(config.get_yaml_file())
+    quantity_all= (len([name for name in os.listdir(folder_machine_tmp) if os.path.isfile(os.path.join(folder_machine_tmp, name))]))
+    dict_programms=make_yaml.open_yaml_file(config.get_yaml_file('YAML_FILE'))
+    error_programs=make_yaml.open_yaml_file(config.get_yaml_file('YAML_FILE_ERROR'))
     for file in simpe_functions.file_search(folder_machine_tmp):  # ищем файл в папке  со станков
         programma=ProgFile(file)     
         name_file_from_machine=programma.find_name_prog()
+        if name_file_from_machine in error_programs:
+            base_logger.debug(f'err программа {name_file_from_machine}') 
+            copy_f(programma,machine, programma.find_name_prog(),err_source)
+            quantity_err +=1
+            continue
+
         if name_file_from_machine in dict_programms:  # если имя файла есть в yaml-файле - то путь берем оттуда
             lst=dict_programms.get(name_file_from_machine).get('prog')
             for x in lst:
@@ -42,7 +51,11 @@ def trans(machine):
             base_logger.debug(f'новая программа {name_file_from_machine}') 
             copy_f(programma,machine, programma.find_name_prog(),new_source)
             quantity_new +=1
-    base_logger.info(f'{machine}\n старых файлов= {quantity_old} \n измененных файлов= {quantity_change} \n новых файлов= {quantity_new}\n всего файлов= {quantity_new + quantity_old + quantity_change} ')
+    if quantity_all!=(quantity_old+quantity_change+quantity_err+quantity_new):
+        a=quantity_all-(quantity_old+quantity_change+quantity_err+quantity_new)
+        base_logger.info(f'остались программы {a}')
+    
+    base_logger.info(f'{machine}\n старых файлов= {quantity_old} \n измененных файлов= {quantity_change} \n новых файлов= {quantity_new}\n err файлов= {quantity_err}\n всего файлов= {quantity_new + quantity_old + quantity_change+quantity_err} ')
     p='-'*30
     base_logger.debug(f'#{p}#')
 
