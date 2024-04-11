@@ -79,9 +79,9 @@ def start():
     dict_other=config.get_dict_section('other')
     dict_all={**dict_nomura,**dict_fanuc,**dict_citizen,**dict_other}
 
-    # time.sleep(a)
-    # yaml_start()       
-    # time.sleep(a)
+    time.sleep(a)
+    yaml_start()       
+    time.sleep(a)
 
     change_keyboard_layout()
     pyauto_start_citizen(dict_citizen)

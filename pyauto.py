@@ -20,15 +20,17 @@ def transfer_sitizen(machine):
     
     picture_folder=r'.picture\\citizen\\'
     foo=MachinePyautogui(machine,picture_folder)
-    # AppOpener.open("filecontrol")
+    AppOpener.open("filecontrol")  
+      
+
     # Popen([r'C:\Program Files (x86)\FileControl\FileControl.exe'])
     # sleep(10)
+    # quit(-1)
+    # for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
+    #     process.kill()
+    #     sleep(4)
 
-    for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
-        process.kill()
-        sleep(4)
-
-    Popen([r'C:\Program Files (x86)\FileControl\FileControl.exe'])
+    # # Popen([r'C:\Program Files (x86)\FileControl\FileControl.exe'])
     # os.startfile(r'C:\Program Files (x86)\FileControl\FileControl.exe')
     sleep(6)
 
@@ -53,11 +55,11 @@ def transfer_sitizen(machine):
     sleep(10)
     if foo.find_picture(('citizen_all_overwrite.png',),region=(700,500,1050,700)):
         foo.simple_left_click(foo.find_picture(('citizen_all_overwrite.png',),region=(700,500,1050,700)))
-    sleep(40)
-    for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
-        process.kill()
-    # AppOpener.close("filecontrol")
-    # foo.simple_left_click((1226, 261))
+    sleep(30)
+    # for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
+    #     process.kill()
+    AppOpener.close("filecontrol")
+    foo.simple_left_click((1226, 261))
     sleep(5)
     
 
