@@ -32,6 +32,9 @@ class MegaHandler(logging.Handler):
         message = self.format(record)
         with open(self.filename, 'a') as file:
             file.write(message + '\n')
+            
+    def get_filename(self):
+        return self.filename
 
 class MegaEmail(logging.Handler):
     def __init__(self,server,port,email,passwd):
@@ -116,7 +119,7 @@ logger_config = {
         },  
         'email':{
             '()':MegaEmail,
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'server':config.get_set_default('server_mail'),
             'port':config.get_set_default('port_mail'),
             'email':config.get_set_default('email_mail'),
@@ -152,16 +155,16 @@ logger_config = {
         },
         'base_logger': {
             'level': 'DEBUG',
-            'handlers': ['py_console','file'],
+            'handlers': ['py_console','file','email'],
         },       
         # 'to_database_logger': {
         #     'level': 'DEBUG',
         #     'handlers': ['console', 'file', 'file1'],
         # },
-        # 'email_logger':{
-        #     'level': 'DEBUG',
-        #     'handlers': ['email'],
-        # }
+        'email_logger':{
+            'level': 'DEBUG',
+            'handlers': ['email'],
+        }
 
     },
 }

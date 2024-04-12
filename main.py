@@ -11,6 +11,7 @@ import pyauto
 
 main_logger=set_logger('telega_logger')
 
+
 def update_folder(machine):
     aa = os.path.join(config.get_set_default('source'), machine)
     if os.path.isdir(aa) == True:
@@ -102,6 +103,13 @@ def start():
 # -----------------------------------------------------------------------
 if __name__ == '__main__':
     start()
+    
+    email_logger=set_logger('email_logger')
+    a=copy_to_database.file_name_base_logger
+    with open(a,'r') as f:
+        message=f.read()
+
+    email_logger.warning(message)
 
 
 

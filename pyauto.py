@@ -46,12 +46,17 @@ def transfer_sitizen(machine):
     foo.simple_left_click(foo.find_picture(('citizen_change.png',),region=(850,310,970,360)))
     if foo.find_picture(TFM_settings.picture(machine.strip()),region=(950,450,1200,620)):
         a=foo.find_picture(TFM_settings.picture(machine.strip()),region=(950,450,1200,620))
-        print(a)
+        # print(a)
         foo.simple_left_click(foo.find_picture(('citizen_folder111.png','citizen_folder1111.png'),region=a))
     sleep(2)
-    foo.simple_left_click(foo.find_picture(('citizen_folder_ok.png',),region=(900,600,1200,700)))
-    foo.simple_left_click(foo.find_picture(('citizen_transfer_to_pc.png',),region=(900,650,1200,750)))
-    foo.simple_left_click(foo.find_picture(('citizen_select_all_machine_yes.png',),region=(950,500,1200,750)))
+    if foo.find_picture(('citizen_folder_ok.png',),region=(900,600,1200,700)):
+        foo.simple_left_click(foo.find_picture(('citizen_folder_ok.png',),region=(900,600,1200,700)))
+
+    if  foo.find_picture(('citizen_transfer_to_pc.png',),region=(900,650,1200,750)):   
+        foo.simple_left_click(foo.find_picture(('citizen_transfer_to_pc.png',),region=(900,650,1200,750)))
+
+    if foo.find_picture(('citizen_select_all_machine_yes.png',),region=(950,500,1200,750)):
+        foo.simple_left_click(foo.find_picture(('citizen_select_all_machine_yes.png',),region=(950,500,1200,750)))
     sleep(10)
     if foo.find_picture(('citizen_all_overwrite.png',),region=(700,500,1050,700)):
         foo.simple_left_click(foo.find_picture(('citizen_all_overwrite.png',),region=(700,500,1050,700)))
@@ -62,9 +67,6 @@ def transfer_sitizen(machine):
     foo.simple_left_click((1226, 261))
     sleep(5)
     
-
-
-
 
 def transfer_fanuc(foo):
 
