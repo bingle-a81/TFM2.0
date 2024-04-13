@@ -5,22 +5,7 @@ import AppOpener
 import time
 import smtplib
 
-print('''SHKV.416001.100.055:
-  adress: "\u0422\u0435\u043C\u043F-\u0410\u0432\u0438\u0430\\\u0428\u0418\u041A\u0412\
-    .416001.100.055 \u0428\u0435\u0441\u0442\u0435\u0440\u043D\u044F \u0446\u0435\u043D\
-    \u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F"
-  prog:
-  - - SHKV.416001.100.055.NC
-    - 46de95f172595c07ef0203358fde2eae
-  - - SHKV.416001.100.055.NC
-    - 2f1da56637e351738f7e894e8231a198
-  - - $2$SHKV.416001.100.055.NC
-    - d6c647df9b57688415549e9e1919cd35
-  - - SHKV.416001.100.055.NC
-    - 726954839823504aeabf1583253e34fc
-  - - SHKV.416001.100.055.NC
-    - d7c64ae999306d758a49056203bf7237
-''')
+
 
 # class SendEmail():
 #     def __init__(self,server,port,email,passwd):
@@ -56,9 +41,9 @@ print('''SHKV.416001.100.055:
 # p.emit('c:\\Users\\breat\\OneDrive\\Рабочий стол\\pro\\STANKI\\.log\\10.03-12.04.2024-debug.log')
 
 
-# keyboard.wait('space')
-# print (win32api.GetCursorPos())      
-
+keyboard.wait('space')
+print (win32api.GetCursorPos())      
+   
 # AppOpener.open("filecontrol")  
 # time.sleep(5)
 # AppOpener.close("filecontrol")                                        

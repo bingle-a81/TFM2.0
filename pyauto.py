@@ -10,6 +10,7 @@ import AppOpener
 from logging_settings import set_logger
 import TFM_settings
 from py_functions import MachinePyautogui
+import py_auto_points
 
 # sleep=time.sleep(5)
 py_log=set_logger('py_logger')
@@ -21,7 +22,7 @@ def transfer_sitizen(machine):
     picture_folder=r'.picture\\citizen\\'
     foo=MachinePyautogui(machine,picture_folder)
     AppOpener.open("filecontrol")  
-      
+    #   TODO try ecxept citizen
 
     # Popen([r'C:\Program Files (x86)\FileControl\FileControl.exe'])
     # sleep(10)
@@ -33,6 +34,12 @@ def transfer_sitizen(machine):
     # # Popen([r'C:\Program Files (x86)\FileControl\FileControl.exe'])
     # os.startfile(r'C:\Program Files (x86)\FileControl\FileControl.exe')
     sleep(6)
+    # a=foo.find_picture(('file_control_hat.png','file_control_hat2.png','file_control_hat3.png'),region=(600,200,1340,310))
+    # print(a)
+    # if a==(658,239,609,60):
+    #     py_auto_points.py_citizen_points()
+    #     return
+    # foo.simple_left_click(a)
 
 
     if foo.find_picture(('citizen_object.png',),region=(1000,300,1260,380)):
@@ -63,8 +70,11 @@ def transfer_sitizen(machine):
     sleep(30)
     # for process in (process for process in psutil.process_iter() if process.name() == "FileControl.exe"):
     #     process.kill()
-    AppOpener.close("filecontrol")
-    foo.simple_left_click((1226, 261))
+    # AppOpener.close("filecontrol")
+    if foo.find_picture(('close.png',),region=(1100,700,1300,800)):
+        foo.simple_left_click(foo.find_picture(('close.png',),region=(1100,700,1300,800)))
+    else:
+        AppOpener.close("filecontrol")
     sleep(5)
     
 

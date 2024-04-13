@@ -8,6 +8,7 @@ from TFM_settings import config
 import join_and_transfert_tmp
 import copy_to_database
 import pyauto
+import py_auto_points
 
 main_logger=set_logger('telega_logger')
 
@@ -51,7 +52,15 @@ def pyauto_start_citizen(dc):
     for x in dc.values():
         for y in x:
             update_folder(y)
-            pyauto.transfer_sitizen(y)            
+    py_auto_points.py_citizen_points()
+    source=config.get_set_default('source')
+    for x in dc.values():
+        for y in x:
+            folder_machine_tmp=os.path.join(source,y)    
+            q= (len([name for name in os.listdir(folder_machine_tmp) if os.path.isfile(os.path.join(folder_machine_tmp, name))]))    
+            if q==0:    
+                pyauto.transfer_sitizen(y)   
+     
 
 def join_and_transfert_tmp_start_nomura(dc):    
     for x,y in dc.items():
