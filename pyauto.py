@@ -165,9 +165,12 @@ def trans_nc_explorer(machine):
             foo.open_pic_folder(x)
         else:
             foo.open_pic_folder(('vihod.png',),region=(1868,0,1915,40),click=1)
-            return              
+            return   
 
-    sleep(10)    
+    if foo.find_picture(('obnovit.png',),region=(1450,70,1570,150)):
+        foo.open_pic_folder( ('obnovit.png',),region=(1450,70,1570,150),click=1)
+
+    sleep(15)    
     
     if foo.find_picture(('imya.png',))==False:
         foo.open_pic_folder( ('kolonki.png','kolonki1.png'),region=(1800,900,1920,1050),click=1)
