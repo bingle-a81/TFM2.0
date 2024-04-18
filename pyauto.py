@@ -123,7 +123,7 @@ def program_transfer_tool(machine):
     foo.open_pic_folder(('last_mod.png',),region=(851,310,1800,350),click=1) 
     transfer_fanuc(foo)
 
-    if machine not in ('Colchester T8MSY','Tsugami M08SY-II'):
+    if machine not in ('Colchester T8MSY','Tsugami M08SY-II','SMEC-NS2100SY'):
         foo.open_pic_folder(('path2.png','path4.png','path8.png'),region=(0,300,250,850),click=1)
         transfer_fanuc(foo)
 
