@@ -23,11 +23,11 @@ def update_folder(machine):
 def counter(foo):
     def wrapper(*args, **kwargs):
         start_count = time.perf_counter()
-        main_logger.warning(f"начало {foo.__name__} \n")
+        # main_logger.warning(f"начало {foo.__name__} \n")
         foo(*args, **kwargs)
-        main_logger.warning(
-            f'Время работы {foo.__name__} {time.strftime("%H:%M:%S", time.gmtime(time.perf_counter() - start_count))} \n'
-        )
+        # main_logger.warning(
+        #     f'Время работы {foo.__name__} {time.strftime("%H:%M:%S", time.gmtime(time.perf_counter() - start_count))} \n'
+        # )
         return
 
     return wrapper

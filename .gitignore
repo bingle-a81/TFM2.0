@@ -2,3 +2,4 @@
 set.ini
 # Ignore dynaconf secret files
 .secrets.*
+Project1.exe
