@@ -13,6 +13,18 @@ import py_auto_points
 main_logger = set_logger("telega_logger")
 
 
+def check_if_file_download(folder_machine_tmp: str):
+    q = len(
+        [
+            name
+            for name in os.listdir(folder_machine_tmp)
+            if os.path.isfile(os.path.join(folder_machine_tmp, name))
+        ]
+    )
+
+    return True if q != 0 else False
+
+
 def update_folder(machine):
     aa = os.path.join(config.get_set_default("source"), machine)
     if os.path.isdir(aa) == True:
@@ -23,7 +35,7 @@ def update_folder(machine):
 def counter(foo):
     def wrapper(*args, **kwargs):
         start_count = time.perf_counter()
-        main_logger.warning(f"начало {foo.__name__} \n")
+        # main_logger.warning(f"начало {foo.__name__} \n")
         foo(*args, **kwargs)
         main_logger.warning(
             f'Время работы {foo.__name__} {time.strftime("%H:%M:%S", time.gmtime(time.perf_counter() - start_count))} \n'
@@ -41,18 +53,24 @@ def yaml_start():
 
 @counter
 def pyauto_start_nomura(dc):
+    source = config.get_set_default("source")
     for x in dc.values():
         for y in x:
             update_folder(y)
             pyauto.trans_nc_explorer(y)
+            if check_if_file_download(os.path.join(source, y)) == False:
+                main_logger.warning(f"{y} не скачался")
 
 
 @counter
 def pyauto_start_fanuc(dc):
+    source = config.get_set_default("source")
     for x in dc.values():
         for y in x:
             update_folder(y)
             pyauto.program_transfer_tool(y)
+            if check_if_file_download(os.path.join(source, y)) == False:
+                main_logger.warning(f"{y} не скачался")
 
 
 @counter
@@ -64,15 +82,8 @@ def pyauto_start_citizen(dc):
     source = config.get_set_default("source")
     for x in dc.values():
         for y in x:
-            folder_machine_tmp = os.path.join(source, y)
-            q = len(
-                [
-                    name
-                    for name in os.listdir(folder_machine_tmp)
-                    if os.path.isfile(os.path.join(folder_machine_tmp, name))
-                ]
-            )
-            if q == 0:
+            if check_if_file_download(os.path.join(source, y)) == False:
+                main_logger.warning(f"{y} не скачался")
                 pyauto.transfer_sitizen(y)
 
 
@@ -98,6 +109,7 @@ def change_keyboard_layout():
 
 @counter
 def start():
+    main_logger.warning("старт скриптонит")
     a = 5
     dict_nomura = config.get_dict_section("NCExplorer")
     dict_fanuc = config.get_dict_section("PttMain")
@@ -111,8 +123,10 @@ def start():
 
     change_keyboard_layout()
     pyauto_start_citizen(dict_citizen)
+
     time.sleep(a)
     pyauto_start_nomura(dict_nomura)
+
     time.sleep(a)
     pyauto_start_fanuc(dict_fanuc)
     time.sleep(a)
