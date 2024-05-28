@@ -213,9 +213,9 @@ def trans_nc_explorer(machine):
     ):
         foo.hotkey("win + up")
 
-    if machine not in ("Nomura NN-20J3XB80(6)", "Nomura NN32-YB3"):
-        py_log.info("open subnet")
-        foo.open_pic_folder(("subnet.png",), region=(100, 100, 400, 400))
+    # if machine not in ("Nomura NN-20J3XB80(6)", "Nomura NN32-YB3"):
+    py_log.info("open subnet")
+    foo.open_pic_folder(("subnet.png",), region=(100, 100, 400, 400))
 
     if foo.find_picture(TFM_settings.picture(machine.strip())):
         foo.open_pic_folder(TFM_settings.picture(machine.strip()))
