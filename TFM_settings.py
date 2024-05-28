@@ -15,11 +15,11 @@ def picture(machine):
         case "Nomura NN-20J3(5)":
             return ("nom5.png", "nom55.png")
         case "Nomura NN-20J3XB80(6)":
-            return ("nom6.png", "nom66.png")
+            return ("nom-6-1.png", "nom-6-2.png", "nom-6-3.png")
         case "Nomura NN-10E":
             return ("nom10.png", "nom110.png")
         case "Nomura NN32-YB3":
-            return ("Nomura-NN32-YB3-1.png", "Nomura-NN32-YB3-1.png")
+            return ("nom32-1.png", "nom32-2.png", "nom32-3.png")
         case "Nexturn SA-26PY":
             return ("next261.png",)
         case "Miyano BNJ-42SY":
