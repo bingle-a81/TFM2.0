@@ -20,7 +20,7 @@ def py_citizen_points():
     sleep(25)
     for x in lst2:
         foo.left_click(x)
-        sleep(1)    
+        sleep(2)    
     sleep(25)
     foo.left_click((1170,727,71,43))
 
