@@ -1,5 +1,6 @@
 import os, time, shutil
 import py_win_keyboard_layout
+import pyautogui
 
 # --------------
 import make_yaml
@@ -117,8 +118,6 @@ def start():
     dict_other = config.get_dict_section("other")
     dict_all = {**dict_nomura, **dict_fanuc, **dict_citizen, **dict_other}
 
-
-
     time.sleep(a)
     yaml_start()
     time.sleep(a)
@@ -144,6 +143,8 @@ def start():
 
 # -----------------------------------------------------------------------
 if __name__ == "__main__":
+    pyautogui.hotkey("win", "d")
+    time.sleep(5)
     start()
 
     email_logger = set_logger("email_logger")
