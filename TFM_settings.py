@@ -38,6 +38,8 @@ def picture(machine):
             return ("tsu08.png",)
         case "Tsugami BO126TF-III":
             return ("ts126.png",)
+        case "Tsugami BO126TF-V":
+            return ("ts1261.png",)
         case "SMEC-NS2100SY":
             return ("smec1.png", "smec2.png")
         case "Citizen Cincom L12(1)":
