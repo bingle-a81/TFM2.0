@@ -100,8 +100,10 @@ def join_and_transfert_tmp_start_other(dc):
 
 @counter
 def copy_to_database_start(dc):
+    a=''
     for x in dc:
-        copy_to_database.trans(x)
+        a+=copy_to_database.trans(x)
+    main_logger.warning(a)
 
 
 def change_keyboard_layout():

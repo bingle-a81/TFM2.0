@@ -11,6 +11,7 @@ from logging_settings import set_logger
 # path=config.get_yaml_file()
 base_logger = set_logger("base_logger")
 file_name_base_logger = base_logger.handlers[1].get_filename()
+telega_message = ""
 
 
 def trans(machine):
@@ -76,12 +77,28 @@ def trans(machine):
             quantity_old + quantity_change + quantity_err + quantity_new
         )
         base_logger.info(f"остались программы {a}")
-
-    base_logger.info(
-        f"{machine}\n старых файлов= {quantity_old} \n измененных файлов= {quantity_change} \n новых файлов= {quantity_new}\n err файлов= {quantity_err}\n всего файлов= {quantity_new + quantity_old + quantity_change+quantity_err} "
+    telega_message = (
+        str(machine)
+        + "\n старых файлов="
+        + str(quantity_old)
+        + "\n измененных файлов="
+        + str(quantity_change)
+        + "\n новых файлов="
+        + str(quantity_new)
+        + "\n err файлов= "
+        + str(quantity_err)
+        + "\n всего файлов= "
+        + str(quantity_new + quantity_old + quantity_change + quantity_err)
+        + "\n"
+        + "-" * 30
+        + "\n"
     )
+    base_logger.info(telega_message)
+    #     f"{machine}\n старых файлов= {quantity_old} \n измененных файлов= {quantity_change} \n новых файлов= {quantity_new}\n err файлов= {quantity_err}\n всего файлов= {quantity_new + quantity_old + quantity_change+quantity_err} "
+    # )
     p = "-" * 30
     base_logger.debug(f"#{p}#")
+    return telega_message
 
 
 def copy_f(programma: ProgFile, mashine: str, progr_folder: str, up_source):
