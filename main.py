@@ -132,6 +132,7 @@ def start():
 
     time.sleep(a)
     pyauto_start_fanuc(dict_fanuc)
+    # pyauto_start_fanuc({'Tsugami BO126 TF-V': ['Tsugami BO126TF-V']})
     time.sleep(a)
 
     join_and_transfert_tmp_start_nomura(dict_nomura)
