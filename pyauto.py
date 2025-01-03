@@ -268,7 +268,7 @@ def trans_nc_explorer(machine):
     keyboard.press("shift")
     foo.left_click((234, 518))  # последняя программа
     keyboard.release("shift")
-    foo.hotkey("ctrl + c")
+    foo.hotkey("ctrl + ins")
 
     sleep(1)
     foo.open_pic_folder(("vihod.png",), region=(1868, 0, 1915, 40), click=1)

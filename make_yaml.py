@@ -112,10 +112,10 @@ def make_yaml_file():
     yaml_logger.warning(f"кол-во файлов не в своих папках {count_mistake_file}")
     time.sleep(5)
     with open(path, "w", encoding="utf-8") as f:
-        yaml.dump(dict_programms, f)
+        yaml.dump(dict_programms, f,allow_unicode=True)
 
     with open(path_yaml_error, "w", encoding="utf-8") as f:
-        yaml.safe_dump(programs_with_error, f)
+        yaml.safe_dump(programs_with_error, f,allow_unicode=True)
 
 
 def open_yaml_file(path):
