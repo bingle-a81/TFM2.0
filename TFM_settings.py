@@ -4,6 +4,8 @@ import os
 
 def picture(machine):
     match machine:
+        case 'Nomura NN-10EX2':
+            return ("nom10ex1.png", "nom10ex2.png")       
         case "Nomura NN-20J2(1)":
             return ("nom1.png", "nom11.png")
         case "Nomura NN-20J2(2)":

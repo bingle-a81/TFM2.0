@@ -129,6 +129,8 @@ def start():
 
     time.sleep(a)
     pyauto_start_nomura(dict_nomura)
+    # pyauto_start_nomura({'Nomura NN-10EX2': ['Nomura NN-10EX2']})
+
 
     time.sleep(a)
     pyauto_start_fanuc(dict_fanuc)
