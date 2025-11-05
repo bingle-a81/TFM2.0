@@ -181,7 +181,7 @@ def program_transfer_tool(machine):
     foo.open_pic_folder(("last_mod.png",), region=(851, 310, 1800, 350), click=1)
     transfer_fanuc(foo)
 
-    if machine not in ("Colchester T8MSY", "Tsugami M08SY-II", "SMEC-NS2100SY"):
+    if machine not in ("Colchester T8MSY", "Tsugami M08SY-II", "SMEC-NS2100SY(1)", "SMEC-NS2100SY(2)"):
         foo.open_pic_folder(
             ("path2.png", "path4.png", "path8.png"), region=(0, 300, 250, 850), click=1
         )
@@ -207,7 +207,7 @@ def trans_nc_explorer(machine):
     sleep(5)
     if (
         foo.find_picture(
-            ("kolonki.png", "kolonki1.png"), region=(1800, 900, 1920, 1050)
+            ("kolonki.png", "kolonki1.png"), region=(1800, 900, 2020, 1150)
         )
         == False
     ):

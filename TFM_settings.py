@@ -42,8 +42,10 @@ def picture(machine):
             return ("ts126.png",)
         case "Tsugami BO126TF-V":
             return ("ts1261.png",)
-        case "SMEC-NS2100SY":
+        case "SMEC-NS2100SY(1)":
             return ("smec1.png", "smec2.png")
+        case "SMEC-NS2100SY(2)":
+            return ("SMEC2(1).png", "SMEC2(2).png")        
         case "Citizen Cincom L12(1)":
             return (
                 "citizen_machine1.png",

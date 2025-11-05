@@ -11,6 +11,7 @@ from logging_settings import set_logger
 # path=config.get_yaml_file()
 base_logger = set_logger("base_logger")
 file_name_base_logger = base_logger.handlers[1].get_filename()
+print(file_name_base_logger)
 telega_message = ""
 
 

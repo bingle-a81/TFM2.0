@@ -112,6 +112,7 @@ def change_keyboard_layout():
 
 @counter
 def start():
+   
     main_logger.warning("старт скриптонит")
     a = 5
     dict_nomura = config.get_dict_section("NCExplorer")
@@ -119,6 +120,7 @@ def start():
     dict_citizen = config.get_dict_section("FileControl")
     dict_other = config.get_dict_section("other")
     dict_all = {**dict_nomura, **dict_fanuc, **dict_citizen, **dict_other}
+    # print(dict_all)
 
     time.sleep(a)
     yaml_start()
@@ -134,14 +136,15 @@ def start():
 
     time.sleep(a)
     pyauto_start_fanuc(dict_fanuc)
-    # pyauto_start_fanuc({'Tsugami BO126 TF-V': ['Tsugami BO126TF-V']})
+    # pyauto_start_fanuc({'SMEC-NS2100SY': ['SMEC-NS2100SY(1)', 'SMEC-NS2100SY(2)']})
     time.sleep(a)
+
 
     join_and_transfert_tmp_start_nomura(dict_nomura)
     join_and_transfert_tmp_start_other(dict_fanuc)
     join_and_transfert_tmp_start_other(dict_citizen)
     join_and_transfert_tmp_start_other(dict_other)
-
+    # quit(-1)
     copy_to_database_start(dict_all)
     time.sleep(a)
 
@@ -156,5 +159,6 @@ if __name__ == "__main__":
     a = copy_to_database.file_name_base_logger
     with open(a, "r") as f:
         message = f.read()
+    print(message)
 
     email_logger.warning(message)
